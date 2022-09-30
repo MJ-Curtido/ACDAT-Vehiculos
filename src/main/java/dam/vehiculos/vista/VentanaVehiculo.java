@@ -20,7 +20,7 @@ public class VentanaVehiculo extends javax.swing.JFrame {
         
         PanelPrincipal panel = new PanelPrincipal(this);
         
-        this.setSize(450, 350);
+        this.setSize(700, 550);
         
         panelActivo = panel;
         this.getContentPane().add(panelActivo);
@@ -89,11 +89,11 @@ public class VentanaVehiculo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 327, Short.MAX_VALUE)
+            .addGap(0, 527, Short.MAX_VALUE)
         );
 
         pack();
