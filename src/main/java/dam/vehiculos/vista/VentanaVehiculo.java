@@ -47,7 +47,43 @@ public class VentanaVehiculo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        btnOpciones = new javax.swing.JMenu();
+        btnCRUD = new javax.swing.JMenuItem();
+        btnJuego = new javax.swing.JMenuItem();
+        btnSalir = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnOpciones.setText("Opciones");
+
+        btnCRUD.setText("CRUD");
+        btnCRUD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCRUDActionPerformed(evt);
+            }
+        });
+        btnOpciones.add(btnCRUD);
+
+        btnJuego.setText("Juego");
+        btnJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJuegoActionPerformed(evt);
+            }
+        });
+        btnOpciones.add(btnJuego);
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        btnOpciones.add(btnSalir);
+
+        jMenuBar1.add(btnOpciones);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,11 +93,27 @@ public class VentanaVehiculo extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGap(0, 327, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuegoActionPerformed
+        PanelJuego panel = new PanelJuego(this);
+
+        this.cambiarPanel(panel);
+    }//GEN-LAST:event_btnJuegoActionPerformed
+
+    private void btnCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCRUDActionPerformed
+        PanelCRUD panel = new PanelCRUD(this);
+
+        this.cambiarPanel(panel);
+    }//GEN-LAST:event_btnCRUDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,5 +151,10 @@ public class VentanaVehiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnCRUD;
+    private javax.swing.JMenuItem btnJuego;
+    private javax.swing.JMenu btnOpciones;
+    private javax.swing.JMenuItem btnSalir;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,16 +29,6 @@ public class PanelPrincipal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-
-        jMenu1.setText("File");
-        jMenuBar2.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar2.add(jMenu2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -53,8 +43,5 @@ public class PanelPrincipal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar2;
     // End of variables declaration//GEN-END:variables
 }
