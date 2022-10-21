@@ -4,6 +4,14 @@
  */
 package dam.vehiculos.vista;
 
+import dam.vehiculos.clases.Vehiculo;
+import dam.vehiculos.daos.DAOVehiculos;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author manu1
@@ -19,7 +27,7 @@ public class PanelCRUD extends javax.swing.JPanel {
         
         this.miVentana = miVentana;
         
-        //Poner que llame a un método rellenar tabla en el cual coja los datos de los DAOs y los meta
+        cargarTabla(tablaVehiculos);
     }
 
     /**
@@ -41,7 +49,7 @@ public class PanelCRUD extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
         btnLeer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVehiculos = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Marca");
@@ -62,12 +70,17 @@ public class PanelCRUD extends javax.swing.JPanel {
         });
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setText("Borrar");
 
         btnLeer.setText("Leer");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -86,7 +99,7 @@ public class PanelCRUD extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVehiculos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -150,6 +163,71 @@ public class PanelCRUD extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbMatriculaActionPerformed
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if (tbModelo.getText().equals("") || tbMarca.getText().equals("") || tbMatricula.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debes introducir todos los valores para poder registrar un vehículo.");
+        }
+        else {
+            insertarVehiculo(this, tablaVehiculos);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    public JTextField getTxtMarca() {
+        return tbMarca;
+    }
+    
+    public JTextField getTxtModelo() {
+        return tbModelo;
+    }
+    
+    public JTextField getTxtMatricula() {
+        return tbMatricula;
+    }
+    
+    public static void cargarTabla(JTable tablaVehiculos) { //DefaultTableModel modeloDeDatosTabla = (DefaultTableModel) tablaVehiculos.getModel();
+        List<Vehiculo> lstVehiculos = DAOVehiculos.getInstance().getVehiculos();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Marca");
+
+        modelo.addColumn("Modelo");
+
+        modelo.addColumn("Matricula");
+
+        for (Vehiculo vehiculo : lstVehiculos) {
+
+            Object[] registroLeido
+                    = {
+                        vehiculo.getMarca(),
+                        vehiculo.getModelo(),
+                        vehiculo.getMatricula()
+
+                    };
+
+            modelo.addRow(registroLeido);
+
+        }
+
+        tablaVehiculos.setModel(modelo);
+    }
+    
+    public boolean insertarVehiculo(PanelCRUD frmVehiculo, JTable tablaVehiculos) {
+        boolean borrado = false;
+        Vehiculo vehiculo = new Vehiculo();
+
+        vehiculo.setMarca(frmVehiculo.getTxtMarca().getText());
+
+        vehiculo.setModelo(frmVehiculo.getTxtModelo().getText());
+
+        vehiculo.setMatricula(frmVehiculo.getTxtMatricula().getText());
+
+        if (DAOVehiculos.getInstance().insertarVehiculo(vehiculo) != 0) {
+            borrado = true;
+            cargarTabla(tablaVehiculos);
+        }
+        return borrado;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
@@ -159,7 +237,7 @@ public class PanelCRUD extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaVehiculos;
     private javax.swing.JTextField tbMarca;
     private javax.swing.JTextField tbMatricula;
     private javax.swing.JTextField tbModelo;
