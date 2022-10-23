@@ -43,7 +43,8 @@ public class DAOVehiculos implements IDAOVehiculos {
 
     @Override
     public int eliminarVehiculos(List<Vehiculo> lstVehiculos) {
-
+        falsaBD.removeAll(lstVehiculos);
+        
         return 0;
     }
 
@@ -69,7 +70,20 @@ public class DAOVehiculos implements IDAOVehiculos {
 
     @Override
     public int eliminarVehiculo(Vehiculo vehiculo) {
-        // TODO Auto-generated method stub
+        falsaBD.remove(vehiculo);
+        
         return 0;
+    }
+    
+    public Boolean existeVehiculo(String matricula) {
+        Boolean existe = false;
+        
+        for (int i = 0; i < falsaBD.size() && !existe; i++) {
+            if (falsaBD.get(i).getMatricula() == matricula) {
+                existe = true;
+            }
+        }
+        
+        return existe;
     }
 }

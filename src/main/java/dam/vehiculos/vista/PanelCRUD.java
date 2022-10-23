@@ -77,6 +77,11 @@ public class PanelCRUD extends javax.swing.JPanel {
         });
 
         btnBorrar.setText("Borrar");
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         btnLeer.setText("Leer");
 
@@ -168,21 +173,24 @@ public class PanelCRUD extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debes introducir todos los valores para poder registrar un vehículo.");
         }
         else {
-            insertarVehiculo(this, tablaVehiculos);
+            insertarVehiculo(tablaVehiculos);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    public JTextField getTxtMarca() {
-        return tbMarca;
-    }
-    
-    public JTextField getTxtModelo() {
-        return tbModelo;
-    }
-    
-    public JTextField getTxtMatricula() {
-        return tbMatricula;
-    }
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        if (tablaVehiculos.getSelectedRowCount() == 1) {
+            
+            Vehiculo vehiculo = new Vehiculo(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 0).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 1).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
+        
+            DAOVehiculos.getInstance().eliminarVehiculo(vehiculo);
+        }
+        else if (tablaVehiculos.getSelectedRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar mínimo un vehículo para poder eliminarlo.");
+        }
+        else {
+            
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
     
     public static void cargarTabla(JTable tablaVehiculos) { //DefaultTableModel modeloDeDatosTabla = (DefaultTableModel) tablaVehiculos.getModel();
         List<Vehiculo> lstVehiculos = DAOVehiculos.getInstance().getVehiculos();
@@ -212,21 +220,19 @@ public class PanelCRUD extends javax.swing.JPanel {
         tablaVehiculos.setModel(modelo);
     }
     
-    public boolean insertarVehiculo(PanelCRUD frmVehiculo, JTable tablaVehiculos) {
-        boolean borrado = false;
-        Vehiculo vehiculo = new Vehiculo();
+    public void insertarVehiculo(JTable tablaVehiculos) {
+        if (!DAOVehiculos.getInstance().existeVehiculo(tbMatricula.getText().toString())) {
+            boolean borrado = false;
+            Vehiculo vehiculo = new Vehiculo(tbMarca.getText().toString(), tbModelo.getText().toString(), tbMatricula.getText().toString());
 
-        vehiculo.setMarca(frmVehiculo.getTxtMarca().getText());
-
-        vehiculo.setModelo(frmVehiculo.getTxtModelo().getText());
-
-        vehiculo.setMatricula(frmVehiculo.getTxtMatricula().getText());
-
-        if (DAOVehiculos.getInstance().insertarVehiculo(vehiculo) != 0) {
-            borrado = true;
-            cargarTabla(tablaVehiculos);
+            if (DAOVehiculos.getInstance().insertarVehiculo(vehiculo) != 0) {
+                borrado = true;
+                cargarTabla(tablaVehiculos);
+            }
         }
-        return borrado;
+        else {
+            JOptionPane.showMessageDialog(null, "El vehículo que se intenta añadir ya existe en nuestra base de datos.");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
