@@ -5,6 +5,7 @@
 package dam.vehiculos.gestion;
 
 import dam.vehiculos.clases.Vehiculo;
+import dam.vehiculos.daos.DAOVehiculos;
 import java.util.ArrayList;
 
 /**
@@ -13,4 +14,12 @@ import java.util.ArrayList;
  */
 public class Gestion {
     private ArrayList<Vehiculo> listaVehiculo;
+    
+    public Gestion() {
+        listaVehiculo = (ArrayList<Vehiculo>) DAOVehiculos.getInstance().getVehiculos();
+    }
+    
+    public void anyadirVehiculo() {
+        
+    }
 }
