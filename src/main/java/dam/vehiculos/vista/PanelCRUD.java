@@ -181,10 +181,8 @@ public class PanelCRUD extends javax.swing.JPanel {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         if (tablaVehiculos.getSelectedRowCount() == 1) {
-            
-            Vehiculo vehiculo = new Vehiculo(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 0).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 1).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
-        
-            DAOVehiculos.getInstance().eliminarVehiculo(vehiculo);
+            gestion.eliminarVehiculo(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 0).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 1).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
+            cargarTabla(tablaVehiculos);
         }
         else if (tablaVehiculos.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar mínimo un vehículo para poder eliminarlo.");
@@ -195,6 +193,7 @@ public class PanelCRUD extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBorrarActionPerformed
     
     public static void cargarTabla(JTable tablaVehiculos) { //DefaultTableModel modeloDeDatosTabla = (DefaultTableModel) tablaVehiculos.getModel();
+        //List<Vehiculo> lstVehiculos = gestion.getListaVehiculos(); NO SE PORQUÉ NO VA
         List<Vehiculo> lstVehiculos = DAOVehiculos.getInstance().getVehiculos();
 
         DefaultTableModel modelo = new DefaultTableModel();
