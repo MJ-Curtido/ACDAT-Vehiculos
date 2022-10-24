@@ -6,6 +6,7 @@ package dam.vehiculos.gestion;
 
 import dam.vehiculos.clases.Vehiculo;
 import dam.vehiculos.daos.DAOVehiculos;
+import static dam.vehiculos.vista.PanelCRUD.cargarTabla;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +20,17 @@ public class Gestion {
         listaVehiculo = (ArrayList<Vehiculo>) DAOVehiculos.getInstance().getVehiculos();
     }
     
-    public void anyadirVehiculo() {
+    public Boolean anyadirVehiculo(String marca, String modelo, String matricula) {
+        boolean borrado = false;
         
+        if (!DAOVehiculos.getInstance().existeVehiculo(matricula)) {
+            Vehiculo vehiculo = new Vehiculo(marca, modelo, matricula);
+
+            if (DAOVehiculos.getInstance().insertarVehiculo(vehiculo) != 0) {
+                borrado = true;
+            }
+        }
+        
+        return borrado;
     }
 }

@@ -6,10 +6,10 @@ package dam.vehiculos.vista;
 
 import dam.vehiculos.clases.Vehiculo;
 import dam.vehiculos.daos.DAOVehiculos;
+import dam.vehiculos.gestion.Gestion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class PanelCRUD extends javax.swing.JPanel {
 
     private VentanaVehiculo miVentana;
+    private Gestion gestion;
     /**
      * Creates new form PanelCRUD
      */
@@ -26,6 +27,7 @@ public class PanelCRUD extends javax.swing.JPanel {
         initComponents();
         
         this.miVentana = miVentana;
+        gestion = new Gestion();
         
         cargarTabla(tablaVehiculos);
     }
@@ -221,14 +223,8 @@ public class PanelCRUD extends javax.swing.JPanel {
     }
     
     public void insertarVehiculo(JTable tablaVehiculos) {
-        if (!DAOVehiculos.getInstance().existeVehiculo(tbMatricula.getText().toString())) {
-            boolean borrado = false;
-            Vehiculo vehiculo = new Vehiculo(tbMarca.getText().toString(), tbModelo.getText().toString(), tbMatricula.getText().toString());
-
-            if (DAOVehiculos.getInstance().insertarVehiculo(vehiculo) != 0) {
-                borrado = true;
-                cargarTabla(tablaVehiculos);
-            }
+        if (gestion.anyadirVehiculo(tbMarca.getText().toString(), tbModelo.getText().toString(), tbMatricula.getText().toString())) {
+            cargarTabla(tablaVehiculos);
         }
         else {
             JOptionPane.showMessageDialog(null, "El vehículo que se intenta añadir ya existe en nuestra base de datos.");

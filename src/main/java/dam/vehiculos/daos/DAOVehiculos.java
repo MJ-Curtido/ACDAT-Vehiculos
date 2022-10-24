@@ -79,7 +79,7 @@ public class DAOVehiculos implements IDAOVehiculos {
         Boolean existe = false;
         
         for (int i = 0; i < falsaBD.size() && !existe; i++) {
-            if (falsaBD.get(i).getMatricula() == matricula) {
+            if (falsaBD.get(i).getMatricula().equals(matricula)) {
                 existe = true;
             }
         }
