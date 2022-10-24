@@ -4,6 +4,8 @@
  */
 package dam.vehiculos.clases;
 
+import java.util.Objects;
+
 /**
  *
  * @author Dam
@@ -15,6 +17,10 @@ public class Vehiculo {
 
     public Vehiculo() {
 
+    }
+    
+    public Vehiculo(String matricula) {
+        this.matricula = matricula;
     }
 
     public Vehiculo(String marca, String modelo, String matricula) {
@@ -46,6 +52,30 @@ public class Vehiculo {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.matricula);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehiculo other = (Vehiculo) obj;
+        return Objects.equals(this.matricula, other.matricula);
+    }
+    
+    
 
     @Override
     public String toString() {

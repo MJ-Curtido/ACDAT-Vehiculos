@@ -6,7 +6,6 @@ package dam.vehiculos.gestion;
 
 import dam.vehiculos.clases.Vehiculo;
 import dam.vehiculos.daos.DAOVehiculos;
-import static dam.vehiculos.vista.PanelCRUD.cargarTabla;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,14 +35,18 @@ public class Gestion {
         return borrado;
     }
     
-    public void eliminarVehiculo (String marca, String modelo, String matricula) {
-        Vehiculo vehiculo = new Vehiculo(marca, modelo, matricula);
+    public void eliminarVehiculo (String matricula) {
+        Vehiculo vehiculo = new Vehiculo(matricula);
         
         DAOVehiculos.getInstance().eliminarVehiculo(vehiculo);
         listaVehiculo = (ArrayList<Vehiculo>) DAOVehiculos.getInstance().getVehiculos();
     }
 
     public List<Vehiculo> getListaVehiculos() {
-        return DAOVehiculos.getInstance().getVehiculos();
+        return new ArrayList<Vehiculo>(listaVehiculo);
+    }
+
+    public void eliminarVehiculos(List<Vehiculo> vehiculos) {
+        DAOVehiculos.getInstance().eliminarVehiculos(vehiculos);
     }
 }

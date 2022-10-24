@@ -7,6 +7,8 @@ package dam.vehiculos.vista;
 import dam.vehiculos.clases.Vehiculo;
 import dam.vehiculos.daos.DAOVehiculos;
 import dam.vehiculos.gestion.Gestion;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -86,6 +88,11 @@ public class PanelCRUD extends javax.swing.JPanel {
         });
 
         btnLeer.setText("Leer");
+        btnLeer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeerActionPerformed(evt);
+            }
+        });
 
         tablaVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,20 +188,34 @@ public class PanelCRUD extends javax.swing.JPanel {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         if (tablaVehiculos.getSelectedRowCount() == 1) {
-            gestion.eliminarVehiculo(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 0).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 1).toString(), tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
+            gestion.eliminarVehiculo(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
             cargarTabla(tablaVehiculos);
         }
         else if (tablaVehiculos.getSelectedRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar mínimo un vehículo para poder eliminarlo.");
         }
         else {
+            int[] filas = tablaVehiculos.getSelectedRows();
             
+            List<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+            
+            for (int i = 0; i < filas.length; i++) {
+                vehiculos.add(new Vehiculo(tablaVehiculos.getValueAt(filas[i], 2).toString()));
+            }
+            
+            gestion.eliminarVehiculos(vehiculos);
+            cargarTabla(tablaVehiculos);
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
-    
-    public static void cargarTabla(JTable tablaVehiculos) { //DefaultTableModel modeloDeDatosTabla = (DefaultTableModel) tablaVehiculos.getModel();
-        //List<Vehiculo> lstVehiculos = gestion.getListaVehiculos(); NO SE PORQUÉ NO VA
-        List<Vehiculo> lstVehiculos = DAOVehiculos.getInstance().getVehiculos();
+
+    private void btnLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeerActionPerformed
+        tbMarca.setText(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 0).toString());
+        tbModelo.setText(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 1).toString());
+        tbMatricula.setText(tablaVehiculos.getValueAt(tablaVehiculos.getSelectedRow(), 2).toString());
+    }//GEN-LAST:event_btnLeerActionPerformed
+
+    public void cargarTabla(JTable tablaVehiculos) { //DefaultTableModel modeloDeDatosTabla = (DefaultTableModel) tablaVehiculos.getModel();
+        List<Vehiculo> lstVehiculos = gestion.getListaVehiculos();
 
         DefaultTableModel modelo = new DefaultTableModel();
 
