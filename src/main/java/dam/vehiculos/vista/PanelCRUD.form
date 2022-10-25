@@ -27,8 +27,8 @@
                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="tbMatricula" min="-2" pref="205" max="-2" attributes="0"/>
-                          <Component id="tbModelo" min="-2" pref="205" max="-2" attributes="0"/>
                           <Component id="tbMarca" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="tbModelo" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -55,12 +55,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tbModelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tbMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tbMarca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tbModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -95,7 +95,7 @@
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tbMarca">
+    <Component class="javax.swing.JTextField" name="tbModelo">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -106,7 +106,7 @@
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tbModelo">
+    <Component class="javax.swing.JTextField" name="tbMarca">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -118,9 +118,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tbMatricula">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbMatriculaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistrar">
       <Properties>

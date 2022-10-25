@@ -49,4 +49,17 @@ public class Gestion {
     public void eliminarVehiculos(List<Vehiculo> vehiculos) {
         DAOVehiculos.getInstance().eliminarVehiculos(vehiculos);
     }
+
+    public Boolean editarVehiculo(Vehiculo vehiculoAEditar, String marca, String modelo, String matricula) {
+        Boolean editado = false;
+        
+        if (!DAOVehiculos.getInstance().existeVehiculo(matricula) || vehiculoAEditar.getMatricula().equals(matricula)) {
+            eliminarVehiculo(vehiculoAEditar.getMatricula());
+            
+            anyadirVehiculo(marca, modelo, matricula);
+            editado = true;
+        }
+        
+        return editado;
+    }
 }
